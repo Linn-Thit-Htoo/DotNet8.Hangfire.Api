@@ -4,15 +4,22 @@ namespace DotNet8.Hangfire.Api
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddFeatures(this IServiceCollection services, WebApplicationBuilder builder)
+        public static IServiceCollection AddFeatures(
+            this IServiceCollection services,
+            WebApplicationBuilder builder
+        )
         {
-            return services.AddDbContextService(builder)
+            return services
+                .AddDbContextService(builder)
                 .AddHangfireService(builder)
                 .AddRepositoryService()
                 .AddBusinessLogicService();
         }
 
-        private static IServiceCollection AddDbContextService(this IServiceCollection services, WebApplicationBuilder builder)
+        private static IServiceCollection AddDbContextService(
+            this IServiceCollection services,
+            WebApplicationBuilder builder
+        )
         {
             builder.Services.AddDbContext<AppDbContext>(
                 opt =>
@@ -25,15 +32,18 @@ namespace DotNet8.Hangfire.Api
             return services;
         }
 
-        private static IServiceCollection AddHangfireService(this IServiceCollection services, WebApplicationBuilder builder)
+        private static IServiceCollection AddHangfireService(
+            this IServiceCollection services,
+            WebApplicationBuilder builder
+        )
         {
             builder.Services.AddHangfire(opt =>
-           {
-               opt.UseSqlServerStorage(builder.Configuration.GetConnectionString("DbConnection"))
-                   .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
-                   .UseSimpleAssemblyNameTypeSerializer()
-                   .UseRecommendedSerializerSettings();
-           });
+            {
+                opt.UseSqlServerStorage(builder.Configuration.GetConnectionString("DbConnection"))
+                    .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+                    .UseSimpleAssemblyNameTypeSerializer()
+                    .UseRecommendedSerializerSettings();
+            });
 
             builder.Services.AddHangfireServer();
             return services;
