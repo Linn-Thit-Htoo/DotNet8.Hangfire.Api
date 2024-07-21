@@ -1,7 +1,6 @@
 ﻿using DotNet8.Hangfire.Api.AppDbContexts;
 using DotNet8.Hangfire.Api.Mapper;
 using DotNet8.Hangfire.Api.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace DotNet8.Hangfire.Api.Repositories.Blog
 {

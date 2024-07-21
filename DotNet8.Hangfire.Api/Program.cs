@@ -4,7 +4,6 @@ using DotNet8.Hangfire.Api.Features.Blog;
 using DotNet8.Hangfire.Api.Models;
 using DotNet8.Hangfire.Api.Repositories.Blog;
 using Hangfire;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
