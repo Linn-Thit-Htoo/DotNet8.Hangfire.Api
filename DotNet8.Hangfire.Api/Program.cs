@@ -1,7 +1,3 @@
-using DotNet8.Hangfire.Api;
-using DotNet8.Hangfire.Api.Features.Blog;
-using Hangfire;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

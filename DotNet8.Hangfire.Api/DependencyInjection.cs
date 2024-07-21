@@ -1,5 +1,4 @@
 ﻿using DotNet8.Hangfire.Api.Features.Blog;
-using Hangfire;
 
 namespace DotNet8.Hangfire.Api
 {
