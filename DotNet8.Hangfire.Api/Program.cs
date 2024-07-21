@@ -1,11 +1,22 @@
+using DotNet8.Hangfire.Api;
+using DotNet8.Hangfire.Api.AppDbContexts;
+using DotNet8.Hangfire.Api.Features.Blog;
+using DotNet8.Hangfire.Api.Models;
+using DotNet8.Hangfire.Api.Repositories.Blog;
+using Hangfire;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddFeatures(builder);
 
 var app = builder.Build();
 
@@ -17,6 +28,22 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseHangfireDashboard();
+
+RecurringJob.AddOrUpdate<IBlogRepository>(
+    Guid.NewGuid().ToString(),
+    x =>
+        x.CreateBlog(
+            new BlogRequestModel()
+            {
+                BlogTitle = "Recurring Job",
+                BlogAuthor = "Recurring Job",
+                BlogContent = "Recurring Job"
+            }
+        ),
+    Cron.Minutely
+);
 
 app.UseAuthorization();
 
