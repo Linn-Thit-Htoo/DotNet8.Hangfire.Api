@@ -45,6 +45,19 @@ RecurringJob.AddOrUpdate<IBlogRepository>(
     Cron.Minutely
 );
 
+BackgroundJob.Schedule<IBlogRepository>(
+    x =>
+        x.CreateBlog(
+            new BlogRequestModel()
+            {
+                BlogTitle = "Delay Job",
+                BlogAuthor = "Delay Job",
+                BlogContent = "Delay Job"
+            }
+        ),
+    TimeSpan.FromMinutes(1)
+);
+
 app.UseAuthorization();
 
 app.MapControllers();

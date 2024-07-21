@@ -15,6 +15,7 @@ namespace DotNet8.Hangfire.Api
                 .AddRepositoryService()
                 .AddBusinessLogicService();
         }
+
         private static IServiceCollection AddDbContextService(this IServiceCollection services, WebApplicationBuilder builder)
         {
             builder.Services.AddDbContext<AppDbContext>(
@@ -27,6 +28,7 @@ namespace DotNet8.Hangfire.Api
 
             return services;
         }
+
         private static IServiceCollection AddHangfireService(this IServiceCollection services, WebApplicationBuilder builder)
         {
             builder.Services.AddHangfire(opt =>
